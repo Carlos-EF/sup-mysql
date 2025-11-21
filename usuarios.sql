@@ -162,23 +162,51 @@ INSERT INTO cds VALUES (13, 'The Death of Peace of Mind', 'Bad Omens', '53:44', 
 UPDATE cds SET genero = "Metalcore" WHERE id = 13;
 
 INSERT INTO cds VALUES (14, 'Finding God Before God Finds Me', 'Bad Omens', NULL, 10, '2019', 'Meta core');
+UPDATE cds SET duracao = "42:02" WHERE id = 14;
+UPDATE cds SET genero = "Metalcore" WHERE id = 14;
+
 INSERT INTO cds VALUES (15, 'B A D O M E N S', 'Bad Omns', '??:??', 10, '2016', 'Rock?');
+UPDATE cds SET banda = "Bad Omens" WHERE id = 15;
+UPDATE cds SET duracao = "43:25" WHERE id = 15;
 
 INSERT INTO cds VALUES (16, 'Inhuman Rampage', 'Dragon Force', '55:??', 8, 2005, 'Power metal');
+UPDATE cds SET duracao = "56:05" WHERE id = 16;
+
 INSERT INTO cds VALUES (17, 'Ultra Beatdown', 'DragonForce', '59:30', NULL, '', 'Power-Metal');
+UPDATE cds SET quantidade_musicas = 8 WHERE id = 17;
+UPDATE cds SET ano_lancamento = "2008" WHERE id = 17;
+
 INSERT INTO cds VALUES (18, 'Valley of the Damed', 'Dragon F0rce', '40:12', 8, 2003, 'Powr metal');
+UPDATE cds SET banda = "DragonForce" WHERE id = 18;
+UPDATE cds SET nome = "Valley of the Damned" WHERE id = 18;
+UPDATE cds SET genero = "Power Metal" WHERE id = 18;
 
 INSERT INTO cds VALUES (19, 'The Black Parade', 'My Chemical Romnace', '51:53', 14, 2006, 'Emo rock');
+UPDATE cds SET banda = "My Chemical Romance" WHERE id = 19;
+
 INSERT INTO cds VALUES (20, 'Three Cheers for Sweet Revenge', 'My Chemicl Romance', '', NULL, 2004, 'Punk/Emo');
+UPDATE cds SET duracao = "39:36" WHERE id = 20;
+UPDATE cds SET quantidade_musicas = 13 WHERE id = 20;
+UPDATE cds SET banda = "My Chemical Romance" WHERE id = 20;
+
 INSERT INTO cds VALUES (21, 'Danger Days', 'My Chemical Romance', '53min', 15, '2010', '');
+UPDATE cds SET genero = "Punk/Emo" WHERE id = 21;
 
 INSERT INTO cds VALUES (22, 'By the Way', 'Restart', '40:15', 10, 2010, 'Pop Rock');
+
 INSERT INTO cds VALUES (23, 'R(e)start', 'Restar', NULL, 12, '2011', 'P0p rock');
+UPDATE cds SET banda = "Restart" WHERE id = 23;
+UPDATE cds SET genero = "Pop Rock" WHERE id = 23;
+UPDATE cds SET duracao = "30:55" WHERE id = 23;
+
 INSERT INTO cds VALUES (24, 'Renascer', 'Restart', '??', 9, '', 'Pop');
+UPDATE cds SET ano_lancamento = "2013" WHERE id = 24;
+UPDATE cds SET duracao = "12:00" WHERE id = 24;
 
 INSERT INTO cds VALUES (25, 'Millenial Rhapsody', 'Oliver Malcom', NULL, NULL, '20??', 'Alt Pop');
+UPDATE cds SET banda = "Oliver Malcolm" WHERE id = 25;
+UPDATE cds SET ano_lancamento = "2020" WHERE id = 25;
+UPDATE cds SET duracao = "03:14" WHERE id = 25;
+UPDATE cds SET quantidade_musicas = 1 WHERE id = 25;
 
 SELECT id, nome, banda, duracao, quantidade_musicas, ano_lancamento, genero FROM cds;
-
-DROP TABLE cds;
-
