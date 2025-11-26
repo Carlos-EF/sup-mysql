@@ -184,11 +184,11 @@ SELECT SUBSTRING("Batatinha Supreme", 1, 9);
 SELECT REPLACE("Batatinha Supreme", "Supreme", "Ultimate");
 
 -- Length
--- Mostra o tamanho de uma string em Bytes(pra cada caractére = 1 byte)
-SELECT LENGTH("Batatinha Supreme");
+-- Mostra o tamanho de uma string em Bytes
+SELECT LENGTH("Batatinha Sensação");
 
 -- Char_Length => Mostra a quantidade de caractéres
-SELECT CHAR_LENGTH("Batatinha Supreme");
+SELECT CHAR_LENGTH("Batatinha Sensação");
 
 -- Concat
 -- Combina registros na ordem que foi passado em uma só string
