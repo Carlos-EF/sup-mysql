@@ -176,12 +176,35 @@ SELECT LOWER(nome) FROM alunos;
 
 -- TAREFA:
 -- Substring
+-- Consultar uma parte específica de string
+SELECT SUBSTRING("Batatinha Supreme", 1, 9);
+
 -- Replace
+-- Substituir uma parte de string por outra
+SELECT REPLACE("Batatinha Supreme", "Supreme", "Ultimate");
+
 -- Length
+-- Mostra o tamanho de uma string em Bytes(pra cada caractére = 1 byte)
+SELECT LENGTH("Batatinha Supreme");
+
+-- Char_Length => Mostra a quantidade de caractéres
+SELECT CHAR_LENGTH("Batatinha Supreme");
+
 -- Concat
+-- Combina registros na ordem que foi passado em uma só string
+SELECT CONCAT(nome, " ", FORMAT((nota1 + nota2 + nota3) / 3, 2)) AS "Nome e média" FROM alunos;
+
 -- LTrim
+-- Remove os espaços do começo da string
+SELECT LTRIM("           .Batatinha Supreme");
+
 -- RTrim
+-- Remove os espaços do final da string
+SELECT RTRIM("Batatinha Supreme.               ");
+
 -- Trim
+-- Remove os espaços do começo e final da string
+SELECT TRIM("            .Batatinha Supreme.               ");
 
 -- Green Field => novo projeto
 -- Brown Field => projeto existente
