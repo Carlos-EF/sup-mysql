@@ -551,58 +551,152 @@ SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 30 DAY) AS "Dep
 SELECT id, nome, data_cadastro, DATE_SUB(data_cadastro, INTERVAL 15 DAY) AS "Retrocedendo 15 dias" FROM clientes;
 
 -- # 97 - Consultar os clientes que se cadastraram em dias pares do mês
+SELECT id, nome, data_cadastro, DAY(data_cadastro) AS "Dia" FROM clientes WHERE MOD(DAY(data_cadastro), 2) = 0;
+
 -- # 98 - Consultar os clientes que se cadastraram em dias ímpares do mês
+SELECT id, nome, data_cadastro, DAY(data_cadastro) AS "Dia" FROM clientes WHERE MOD(DAY(data_cadastro), 2) != 0;
+
 -- # 99 - Consultar os clientes formatando a data como "Mês Ano" exemplo: "Novembro 2024" (usar DATE_FORMAT)
 SELECT id, nome, DATE_FORMAT(data_cadastro, "%M %Y") FROM clientes;
 
 -- # 100 - Adicionar uma coluna chamada "status" na tabela "clientes"
+ALTER TABLE clientes ADD COLUMN status VARCHAR(100);
+
 -- # 101 - Atualizar todos os clientes definindo os seguintes status:
 -- #       Ativo para id 1
+UPDATE clientes SET status = "Ativo" WHERE id = 1;
+
 -- #       Ativo para id 2
+UPDATE clientes SET status = "Ativo" WHERE id = 2;
+
 -- #       Pendente para id 3
+UPDATE clientes SET status = "Pendente" WHERE id = 3;
+
 -- #       Ativo para id 4
+UPDATE clientes SET status = "Ativo" WHERE id = 4;
+
 -- #       Inativo para id 5
+UPDATE clientes SET status = "Inativo" WHERE id = 5;
+
 -- #       Ativo para id 6
+UPDATE clientes SET status = "Ativo" WHERE id = 6;
+
 -- #       Ativo para id 7
+UPDATE clientes SET status = "Ativo" WHERE id = 7;
+
 -- #       Pendente para id 8
+UPDATE clientes SET status = "Pendente" WHERE id = 8;
+
 -- #       Ativo para id 9
+UPDATE clientes SET status = "Ativo" WHERE id = 9;
+
 -- #       Inativo para id 10
+UPDATE clientes SET status = "Inativo" WHERE id = 10;
+
 -- # 102 - Consultar os clientes filtrando por status "Ativo"
+SELECT id, nome, status FROM clientes WHERE status = "Ativo";
+
 -- # 103 - Consultar os clientes filtrando por status "Inativo" ou "Pendente"
+SELECT id, nome, status FROM clientes WHERE status = "Inativo" OR status = "Pendente";
+
 -- # 104 - Adicionar uma coluna chamada "cpf" na tabela "clientes"
+ALTER TABLE clientes ADD COLUMN cpf VARCHAR(100);
+
 -- # 105 - Atualizar todos os clientes definindo os seguintes CPFs:
 -- #       123.456.789-01 para id 1
+UPDATE clientes SET cpf = "123.456.789-01" WHERE id = 1;
+
 -- #       234.567.890-12 para id 2
+UPDATE clientes SET cpf = "234.567.890-12" WHERE id = 2;
+
 -- #       345.678.901-23 para id 3
+UPDATE clientes SET cpf = "345.678.901-23" WHERE id = 3;
+
 -- #       456.789.012-34 para id 4
+UPDATE clientes SET cpf = "456.789.012-34" WHERE id = 4;
+
 -- #       567.890.123-45 para id 5
+UPDATE clientes SET cpf = "567.890.123-45" WHERE id = 5;
+
 -- #       678.901.234-56 para id 6
+UPDATE clientes SET cpf = "678.901.234-56" WHERE id = 6;
+
 -- #       789.012.345-67 para id 7
+UPDATE clientes SET cpf = "789.012.345-67" WHERE id = 7;
+
 -- #       890.123.456-78 para id 8
+UPDATE clientes SET cpf = "890.123.456-78" WHERE id = 8;
+
 -- #       901.234.567-89 para id 9
+UPDATE clientes SET cpf = "901.234.567-89" WHERE id = 9;
+
 -- #       012.345.678-90 para id 10
+UPDATE clientes SET cpf = "012.345.678-90" WHERE id = 10;
+
 -- # 106 - Consultar os clientes filtrando por CPF que comece com "123"
+SELECT id, nome, cpf FROM clientes WHERE cpf LIKE "123%";
+
 -- # 107 - Consultar os clientes onde o CPF contenha "456"
+SELECT id,nome, cpf FROM clientes WHERE cpf LIKE "%456%";
+
 -- # 108 - Adicionar uma coluna chamada "total_gasto" do tipo decimal na tabela "clientes"
+ALTER TABLE clientes ADD COLUMN total_gasto DOUBLE;
+
 -- # 109 - Atualizar o total gasto dos clientes definindo os seguintes valores:
 -- #       R$ 1.250,00 para id 1
+UPDATE clientes SET total_gasto = 1250.00 WHERE id = 1;
+
 -- #       R$ 890,50 para id 2
+UPDATE clientes SET total_gasto = 890.50 WHERE id = 2;
+
 -- #       R$ 2.340,00 para id 3
+UPDATE clientes SET total_gasto = 2340.00 WHERE id = 3;
+
 -- #       R$ 560,00 para id 4
+UPDATE clientes SET total_gasto = 560.00 WHERE id = 4;
+
 -- #       R$ 3.120,75 para id 5
+UPDATE clientes SET total_gasto = 3120.75 WHERE id = 5;
+
 -- #       R$ 780,00 para id 6
+UPDATE clientes SET total_gasto = 780.00 WHERE id = 6;
+
 -- #       R$ 1.890,00 para id 7
+UPDATE clientes SET total_gasto = 1890.00 WHERE id = 7;
+
 -- #       R$ 450,00 para id 8
+UPDATE clientes SET total_gasto = 450.00 WHERE id = 8;
+
 -- #       R$ 2.670,00 para id 9
+UPDATE clientes SET total_gasto = 2670.00 WHERE id = 9;
+
 -- #       R$ 1.100,00 para id 10
+UPDATE clientes SET total_gasto = 1100.00 WHERE id = 10;
+
 -- # 110 - Consultar o valor total gasto por todos os clientes
+SELECT SUM(total_gasto) AS "Total gasto dos clientes" FROM clientes;
+
 -- # 111 - Consultar o menor valor gasto entre todos os clientes
+SELECT MIN(total_gasto) AS "Menor valor gasto" FROM clientes;
+
 -- # 112 - Consultar o maior valor gasto entre todos os clientes
+SELECT MAX(total_gasto) AS "Maior valor gasto" FROM clientes;
+
 -- # 113 - Consultar a média de valores gastos por todos os clientes
+SELECT FORMAT(AVG(total_gasto), 2) AS "Média de valor gasto" FROM clientes;
+
 -- # 114 - Consultar os clientes com total gasto maior que R$ 1.000,00
+SELECT id, nome, total_gasto FROM clientes WHERE total_gasto > 1000.00;
+
 -- # 115 - Consultar os clientes com total gasto menor que R$ 1.000,00
+SELECT id, nome, total_gasto FROM clientes WHERE total_gasto < 1000.00;
+
 -- # 116 - Consultar os clientes ordenando pelo total gasto em ordem decrescente
+SELECT id, nome, total_gasto FROM clientes ORDER BY total_gasto DESC;
+
 -- # 117 - Consultar os 5 clientes que mais gastaram
+SELECT id, nome, total_gasto FROM clientes ORDER BY total_gasto DESC LIMIT 5;
+
 -- # 118 - Adicionar uma coluna chamada "data_ultima_compra" do tipo date na tabela "clientes"
 -- # 119 - Atualizar a data da última compra dos clientes definindo as seguintes datas:
 -- #       10/11/2024 para id 1
