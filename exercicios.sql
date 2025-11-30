@@ -698,39 +698,111 @@ SELECT id, nome, total_gasto FROM clientes ORDER BY total_gasto DESC;
 SELECT id, nome, total_gasto FROM clientes ORDER BY total_gasto DESC LIMIT 5;
 
 -- # 118 - Adicionar uma coluna chamada "data_ultima_compra" do tipo date na tabela "clientes"
+ALTER TABLE clientes ADD COLUMN data_ultima_compra DATE;
+
 -- # 119 - Atualizar a data da última compra dos clientes definindo as seguintes datas:
 -- #       10/11/2024 para id 1
+UPDATE clientes SET data_ultima_compra = "2024-11-10" WHERE id = 1;
+
 -- #       15/11/2024 para id 2
+UPDATE clientes SET data_ultima_compra = "2024-11-15" WHERE id = 2;
+
 -- #       20/10/2024 para id 3
+UPDATE clientes SET data_ultima_compra = "2024-10-20" WHERE id = 3;
+
 -- #       05/09/2024 para id 4
+UPDATE clientes SET data_ultima_compra = "2024-9-5" WHERE id = 4;
+
 -- #       18/08/2024 para id 5
+UPDATE clientes SET data_ultima_compra = "2024-8-18" WHERE id = 5;
+
 -- #       22/07/2024 para id 6
+UPDATE clientes SET data_ultima_compra = "2024-7-22" WHERE id = 6;
+
 -- #       30/06/2024 para id 7
+UPDATE clientes SET data_ultima_compra = "2024-6-30" WHERE id = 7;
+
 -- #       12/05/2024 para id 8
+UPDATE clientes SET data_ultima_compra = "2024-5-12" WHERE id = 8;
+
 -- #       08/04/2024 para id 9
+UPDATE clientes SET data_ultima_compra = "2024-4-8" WHERE id = 9;
+
 -- #       25/03/2024 para id 10
+UPDATE clientes SET data_ultima_compra = "2024-3-25" WHERE id = 10;
+
 -- # 120 - Consultar os clientes que fizeram a última compra há mais de 120 dias
+SELECT id, nome, data_ultima_compra FROM clientes WHERE DATEDIFF(CURRENT_DATE(), data_ultima_compra) > 120;
+
 -- # 121 - Consultar os clientes que fizeram a última compra no mesmo mês do cadastro
+SELECT id, nome, data_cadastro, data_ultima_compra FROM clientes WHERE MONTH(data_cadastro) = MONTH(data_ultima_compra);
+
 -- # 122 - Consultar a diferença em dias entre a data de cadastro e a última compra de cada cliente
+SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_cadastro, data_ultima_compra) AS "Diferença de datas" FROM clientes;
+
 -- # 123 - Consultar os clientes cadastrados em 2024
+SELECT id, nome, data_cadastro FROM clientes WHERE YEAR(data_cadastro) = "2024";
+
 -- # 124 - Consultar os clientes cadastrados no primeiro semestre (janeiro a junho)
+SELECT id, nome, data_cadastro FROM clientes WHERE MONTH(data_cadastro) >= "1" AND MONTH(data_cadastro) <= "6";
+
 -- # 125 - Consultar os clientes cadastrados no segundo semestre (julho a dezembro)
+SELECT id, nome, data_cadastro FROM clientes WHERE MONTH(data_cadastro) >= "7" AND MONTH(data_cadastro) <= "12";
+
 -- # 126 - Consultar a data da última compra formatada como "DD de Mês de YYYY" exemplo: "10 de Novembro de 2024"
+SET lc_time_names = "pt-BR";
+SELECT id, nome, DATE_FORMAT(data_ultima_compra, "%d de %M de %Y") AS "Data formatada" FROM clientes;
+
 -- # 127 - Consultar os clientes onde o mês da última compra seja igual ao mês atual
+SELECT id, nome, data_ultima_compra FROM clientes WHERE MONTH(CURRENT_DATE()) = MONTH(data_ultima_compra);
+
 -- # 128 - Consultar os clientes ordenando pela diferença entre cadastro e última compra (do maior para o menor)
+SELECT id, nome, data_cadastro, data_ultima_compra FROM clientes ORDER BY DATEDIFF(data_cadastro, data_ultima_compra) DESC;
+
 -- # 129 - Consultar o trimestre da data de cadastro (usar QUARTER)
+SELECT id, nome, data_cadastro, QUARTER(data_cadastro) AS "Trimestre" FROM clientes;
+
 -- # 130 - Consultar os clientes cadastrados no mesmo trimestre
+SELECT id, nome, data_cadastro, QUARTER(data_cadastro) AS "Trimestre" FROM clientes WHERE QUARTER(data_cadastro) = 1;
+
+SELECT id, nome, data_cadastro, QUARTER(data_cadastro) AS "Trimestre" FROM clientes WHERE QUARTER(data_cadastro) = 2;
+
+SELECT id, nome, data_cadastro, QUARTER(data_cadastro) AS "Trimestre" FROM clientes WHERE QUARTER(data_cadastro) = 3;
+
+SELECT id, nome, data_cadastro, QUARTER(data_cadastro) AS "Trimestre" FROM clientes WHERE QUARTER(data_cadastro) = 4;
+
 -- # 131 - Atualizar a data_ultima_compra para NULL do cliente com id 10 (simulando cliente que nunca comprou)
+UPDATE clientes SET data_ultima_compra = NULL WHERE id = 10;
+
 -- # 132 - Consultar os clientes que nunca compraram (data_ultima_compra NULL)
+SELECT id, nome, data_ultima_compra FROM clientes WHERE data_ultima_compra IS NULL;
+
 -- # 133 - Consultar a semana do ano em que cada cliente se cadastrou (usar WEEK)
+SELECT id, nome, data_cadastro, WEEK(data_cadastro) AS "Semana que se cadastrou" FROM clientes;
+
 -- # 134 - Consultar os clientes cujo nome contenha a letra "e"
+SELECT id, nome FROM clientes WHERE nome LIKE "%e%";
 -- # 135 - Consultar os clientes cujo email contenha "gmail" ou "hotmail"
+SELECT id, nome, email FROM clientes WHERE email LIKE "%gmail%" OR email LIKE "%hotmail%";
+
 -- # 136 - Atualizar o status para "Inativo" dos clientes com total gasto igual a zero
+UPDATE clientes SET status = "Inativo" WHERE total_gasto = 0;
+
 -- # 137 - Consultar os clientes filtrando por cidade ordenando por total gasto decrescente
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "%a%" ORDER BY total_gasto ASC;
+
 -- # 138 - Consultar o dia do ano em que cada cliente se cadastrou (usar DAYOFYEAR)
+SELECT id, nome, data_cadastro, DAYOFYEAR(data_cadastro) AS "Dia do ano" FROM clientes;
+
 -- # 139 - Consultar os clientes que se cadastraram em finais de semana (usar DAYOFWEEK)
+SELECT id, nome, data_cadastro, DAYOFWEEK(data_cadastro) AS "Final de Semana" FROM clientes WHERE DAYOFWEEK(data_cadastro) = 1 OR DAYOFWEEK(data_cadastro) = 7;
+
 -- # 140 - Consultar a data de cadastro no formato "AAAA-MM" para agrupar visualmente por mês/ano
+SELECT id, nome, DATE_FORMAT(data_cadastro, "%Y-%m") AS "Data formatada" FROM clientes;
+
 -- # 141 - Consultar os clientes adicionando 1 ano à data de cadastro (aniversário de cliente)
+SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 1 YEAR) AS "Aniversário" FROM clientes;
+
 -- # 142 - Consultar os clientes onde o ano da última compra seja diferente do ano de cadastro
 -- # 143 - Consultar a data e hora atual do sistema (usar NOW)
 -- # 144 - Consultar apenas a data atual do sistema (usar CURDATE)
