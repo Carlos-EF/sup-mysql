@@ -804,10 +804,21 @@ SELECT id, nome, DATE_FORMAT(data_cadastro, "%Y-%m") AS "Data formatada" FROM cl
 SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 1 YEAR) AS "Aniversário" FROM clientes;
 
 -- # 142 - Consultar os clientes onde o ano da última compra seja diferente do ano de cadastro
+SELECT id, nome, data_cadastro, data_ultima_compra FROM clientes WHERE data_cadastro != data_ultima_compra;
+
 -- # 143 - Consultar a data e hora atual do sistema (usar NOW)
+SELECT NOW();
+
 -- # 144 - Consultar apenas a data atual do sistema (usar CURDATE)
+SELECT CURDATE();
+
 -- # 145 - Consultar apenas o horário atual do sistema (usar CURTIME)
+SELECT CURTIME();
+
 -- # 146 - Consultar todas as colunas dos clientes ordenando por data de cadastro, não utilizar wildcard
+SELECT * FROM clientes ORDER BY data_cadastro DESC;
+SELECT id, nome, telefone, email, cidade, status, cpf, data_cadastro, data_ultima_compra, total_gasto FROM clientes ORDER BY data_cadastro DESC;
+
 -- # 147 - Inserir um novo cliente com os seguintes valores:
 -- #       nome: "Carlos Alberto Mendes"
 -- #       telefone: "(85) 99123-4567"
@@ -818,11 +829,37 @@ SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 1 YEAR) AS "Ani
 -- #       cpf: "987.654.321-00"
 -- #       total_gasto: 1500.00
 -- #       data_ultima_compra: 2024-12-15
+INSERT INTO clientes(nome, telefone, email, cidade, data_cadastro, status, cpf, total_gasto, data_ultima_compra) VALUES ("Carlos Alberto Mendes"),
+("(85) 99123-4567"),
+("carlos.mendes@email.com"),
+("Fortaleza"),
+("2024-12-1"),
+("Ativo"),
+("987.654.321-00"),
+(1500.00),
+("2024-12-15");
+
 -- # 148 - Consultar o último dia do mês de cadastro de cada cliente (usar LAST_DAY)
+SELECT id, nome, data_cadastro, LAST_DAY(data_cadastro) AS "Último dia do mês" FROM clientes;
+
 -- # 149 - Consultar os clientes convertendo a data de cadastro para timestamp (usar UNIX_TIMESTAMP)
+SELECT id, nome, data_cadastro, UNIX_TIMESTAMP(data_cadastro) AS "Unix Timestamp" FROM clientes;
+
 -- # 150 - Consultar os clientes exibindo há quantos meses cada um se cadastrou (usar TIMESTAMPDIFF)
+SELECT id, nome, data_cadastro, TIMESTAMPDIFF(MONTH, data_cadastro, CURDATE()) AS "Quantos meses cadastrado" FROM clientes;
+
 -- # 151 - Consultar os clientes que se cadastraram em meses com 31 dias
+SELECT id, nome, data_cadastro, LAST_DAY(data_cadastro) AS "Último dia do mês" FROM clientes WHERE LAST_DAY(data_cadastro) = 31;
+
 -- # 152 - Consultar os clientes exibindo a idade do cadastro em anos completos (usar TIMESTAMPDIFF com YEAR)
+SELECT id, nome, data_cadastro, TIMESTAMPDIFF(YEAR, data_cadastro, CURDATE()) AS "Quantos anos cadastrado" FROM clientes;
+
 -- # 153 - Consultar a data de cadastro adicionando 6 meses (usar DATE_ADD com MONTH)
+SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 6 MONTH) AS "+ 6 meses" FROM clientes;
+
 -- # 154 - Consultar os clientes onde a diferença entre cadastro e última compra seja menor que 30 dias
+SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_cadastro, data_ultima_compra) AS "Difereças entre cadastro e compra" FROM clientes WHERE DATEDIFF(data_cadastro, data_ultima_compra) < 30;
+
 -- # 155 - Consultar os clientes formatando a data de cadastro como "Nome_do_Dia, DD/MM/YYYY"
+SET lc_time_names = "pt-BR";
+SELECT id, nome, DATE_FORMAT(data_cadastro, "%W, %d/%m/%Y") AS "Data formatada" FROM clientes;
