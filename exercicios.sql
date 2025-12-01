@@ -732,13 +732,13 @@ UPDATE clientes SET data_ultima_compra = "2024-4-8" WHERE id = 9;
 UPDATE clientes SET data_ultima_compra = "2024-3-25" WHERE id = 10;
 
 -- # 120 - Consultar os clientes que fizeram a última compra há mais de 120 dias
-SELECT id, nome, data_ultima_compra FROM clientes WHERE DATEDIFF(CURRENT_DATE(), data_ultima_compra) > 120;
+SELECT id, nome, data_ultima_compra, DATEDIFF(CURRENT_DATE(), data_ultima_compra) AS "Dias" FROM clientes WHERE DATEDIFF(CURRENT_DATE(), data_ultima_compra) > 120;
 
 -- # 121 - Consultar os clientes que fizeram a última compra no mesmo mês do cadastro
 SELECT id, nome, data_cadastro, data_ultima_compra FROM clientes WHERE MONTH(data_cadastro) = MONTH(data_ultima_compra);
 
 -- # 122 - Consultar a diferença em dias entre a data de cadastro e a última compra de cada cliente
-SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_cadastro, data_ultima_compra) AS "Diferença de datas" FROM clientes;
+SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_ultima_compra, data_cadastro) AS "Diferença de datas" FROM clientes;
 
 -- # 123 - Consultar os clientes cadastrados em 2024
 SELECT id, nome, data_cadastro FROM clientes WHERE YEAR(data_cadastro) = "2024";
@@ -838,7 +838,7 @@ SELECT id, nome, telefone, email, cidade, status, cpf, data_cadastro, data_ultim
 -- #       cpf: "987.654.321-00"
 -- #       total_gasto: 1500.00
 -- #       data_ultima_compra: 2024-12-15
-INSERT INTO clientes(nome, telefone, email, cidade, data_cadastro, status, cpf, total_gasto, data_ultima_compra) VALUES ("Carlos Alberto Mendes"),
+INSERT INTO clientes (nome, telefone, email, cidade, data_cadastro, status, cpf, total_gasto, data_ultima_compra) VALUES ("Carlos Alberto Mendes"),
 ("(85) 99123-4567"),
 ("carlos.mendes@email.com"),
 ("Fortaleza"),
@@ -849,7 +849,7 @@ INSERT INTO clientes(nome, telefone, email, cidade, data_cadastro, status, cpf, 
 ("2024-12-15");
 
 -- # 148 - Consultar o último dia do mês de cadastro de cada cliente (usar LAST_DAY)
-SELECT id, nome, data_cadastro, LAST_DAY(data_cadastro) AS "Último dia do mês" FROM clientes;
+SELECT id, nome, data_cadastro, DAY(LAST_DAY(data_cadastro)) AS "Último dia do mês" FROM clientes;
 
 -- # 149 - Consultar os clientes convertendo a data de cadastro para timestamp (usar UNIX_TIMESTAMP)
 SELECT id, nome, data_cadastro, UNIX_TIMESTAMP(data_cadastro) AS "Unix Timestamp" FROM clientes;
@@ -858,7 +858,7 @@ SELECT id, nome, data_cadastro, UNIX_TIMESTAMP(data_cadastro) AS "Unix Timestamp
 SELECT id, nome, data_cadastro, TIMESTAMPDIFF(MONTH, data_cadastro, CURDATE()) AS "Quantos meses cadastrado" FROM clientes;
 
 -- # 151 - Consultar os clientes que se cadastraram em meses com 31 dias
-SELECT id, nome, data_cadastro, LAST_DAY(data_cadastro) AS "Último dia do mês" FROM clientes WHERE LAST_DAY(data_cadastro) = 31;
+SELECT id, nome, data_cadastro, DAY(LAST_DAY(data_cadastro)) AS "Último dia do mês" FROM clientes WHERE DAY(LAST_DAY(data_cadastro)) = 31;
 
 -- # 152 - Consultar os clientes exibindo a idade do cadastro em anos completos (usar TIMESTAMPDIFF com YEAR)
 SELECT id, nome, data_cadastro, TIMESTAMPDIFF(YEAR, data_cadastro, CURDATE()) AS "Quantos anos cadastrado" FROM clientes;
@@ -867,7 +867,7 @@ SELECT id, nome, data_cadastro, TIMESTAMPDIFF(YEAR, data_cadastro, CURDATE()) AS
 SELECT id, nome, data_cadastro, DATE_ADD(data_cadastro, INTERVAL 6 MONTH) AS "+ 6 meses" FROM clientes;
 
 -- # 154 - Consultar os clientes onde a diferença entre cadastro e última compra seja menor que 30 dias
-SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_cadastro, data_ultima_compra) AS "Difereças entre cadastro e compra" FROM clientes WHERE DATEDIFF(data_cadastro, data_ultima_compra) < 30;
+SELECT id, nome, data_cadastro, data_ultima_compra, DATEDIFF(data_ultima_compra, data_cadastro) AS "Difereças entre cadastro e compra" FROM clientes WHERE DATEDIFF(data_ultima_compra, data_cadastro) < 30;
 
 -- # 155 - Consultar os clientes formatando a data de cadastro como "Nome_do_Dia, DD/MM/YYYY"
 SET lc_time_names = "pt-BR";
