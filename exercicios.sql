@@ -782,6 +782,7 @@ SELECT id, nome, data_cadastro, WEEK(data_cadastro) AS "Semana que se cadastrou"
 
 -- # 134 - Consultar os clientes cujo nome contenha a letra "e"
 SELECT id, nome FROM clientes WHERE nome LIKE "%e%";
+
 -- # 135 - Consultar os clientes cujo email contenha "gmail" ou "hotmail"
 SELECT id, nome, email FROM clientes WHERE email LIKE "%gmail%" OR email LIKE "%hotmail%";
 
@@ -789,7 +790,15 @@ SELECT id, nome, email FROM clientes WHERE email LIKE "%gmail%" OR email LIKE "%
 UPDATE clientes SET status = "Inativo" WHERE total_gasto = 0;
 
 -- # 137 - Consultar os clientes filtrando por cidade ordenando por total gasto decrescente
-SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "%a%" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "São Paulo" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Rio de Janeiro" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Belo Horizonte" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Curitiba" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Porto Alegre" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Brasília" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Salvador" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Recife" ORDER BY total_gasto ASC;
+SELECT id, nome, cidade, total_gasto FROM clientes WHERE cidade LIKE "Belém" ORDER BY total_gasto ASC;
 
 -- # 138 - Consultar o dia do ano em que cada cliente se cadastrou (usar DAYOFYEAR)
 SELECT id, nome, data_cadastro, DAYOFYEAR(data_cadastro) AS "Dia do ano" FROM clientes;
